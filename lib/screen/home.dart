@@ -19,7 +19,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<RecipeModel> recipes = new List<RecipeModel>();
   TextEditingController textEditingController = new TextEditingController();
-
+  
   getRecipes(String query) async {
     String url =
         "https://api.edamam.com/search?q=$query&app_id=16025d37&app_key=3a18a22bcaf6c87ce26a14e8c9be936e";
@@ -37,26 +37,8 @@ class _HomeState extends State<Home> {
 
     setState(() { });
     print("${recipes.toString()}");
+   
   }
-
-  // startRecipes() async {
-  //   String url =
-  //       "https://api.edamam.com/search?q=mangos&app_id=16025d37&app_key=3a18a22bcaf6c87ce26a14e8c9be936e";
-
-  //   var response = await http.get(url);
-  //   Map<String, dynamic> jsonData = jsonDecode(response.body);
-
-  //   jsonData["hits"].forEach((element) {
-  //     print(element.toString());
-
-  //     RecipeModel recipeModel = new RecipeModel();
-  //     recipeModel = RecipeModel.fromMap(element["recipe"]);
-  //     recipes.add(recipeModel);
-  //   });
-
-  //   setState(() { });
-  //   print("${recipes.toString()}");
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +48,8 @@ class _HomeState extends State<Home> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color(0xffFFEBEE),
-            Color(0xffBDBDBD),
-          ])),
+          color: Color(0xffE1F5FE),
+          ),
         ),
         SingleChildScrollView(
           child: Container(
@@ -85,7 +65,7 @@ class _HomeState extends State<Home> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: Colors.white,
+                        color: Colors.black54,
                       ),
                     ),
                     Text(
@@ -102,11 +82,15 @@ class _HomeState extends State<Home> {
                 ),
                 Text(
                   "Just enter the name of your food and I will show you the best way to  cook it... As easy as that ",
-                  style: TextStyle(color: Colors.black45),
+                  style: TextStyle(color: Colors.black87),
                 ),
                 SizedBox(height: 30),
                 Container(
-                 
+                   height: 50.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.white70,
+                        ),
                   
                   width: MediaQuery.of(context).size.width,
                   child: Row(
@@ -121,11 +105,15 @@ class _HomeState extends State<Home> {
                           }
                         },
                         child: Container(
-                        
-                          
+                          height: 50.0,
+                          width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.white,
+                        ),
                           child: Icon(
                             Icons.search,
-                            color: Colors.white,
+                            color: Colors.black54,
                           ),
                         ),
                       ),
@@ -139,7 +127,7 @@ class _HomeState extends State<Home> {
                             border: InputBorder.none,
                             hintStyle: TextStyle(
                               fontSize: 18,
-                              color: Colors.red,
+                              color: Colors.grey,
                             ),
                           ),
                           style: TextStyle(fontSize: 18),
@@ -159,8 +147,8 @@ class _HomeState extends State<Home> {
                     mainAxisSpacing: 8.0),
                     children:
                       List.generate(recipes.length ,(index) {
-                        return GridTile( 
-                          child:RecipieTile(
+                        return  GridTile( 
+                          child:  RecipieTile(
                             title: recipes[index].label,
                             desc: recipes[index].source,
                             imgUrl: recipes[index].image,
@@ -200,7 +188,7 @@ class _RecipieTileState extends State<RecipieTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return  Wrap(
       children: <Widget>[
         GestureDetector(
           onTap: () {
